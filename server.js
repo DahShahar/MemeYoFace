@@ -18,23 +18,21 @@ indico.apiKey = key;
 indico.fer = function(photo, callback) {
 	//console.log(photo);
 	//onsole.log(JSON.stringify({'data': photo.substr(0, 100)}));
-	console.log('https://apiv2.indico.io/fer?key=' + this.apiKey);
+	//console.log('https://apiv2.indico.io/fer?key=' + this.apiKey);
 	request.post({url: 'https://apiv2.indico.io/fer?key=' + this.apiKey, form: {'data': photo}}, callback)
 };
 
 function sendToIndico(endpoint, data, callback) {
   var key =  indico.apiKey;
-  console.log(data, typeof data);
     collectionName = 'wuttt';
     url = 'https://apiv2.indico.io'+ endpoint +'key='+ key;
-	console.log(url);
   request.post({url: url, form: {'data': data, 'collection': collectionName}}, callback);
 }
 
 //sendToIndico('/custom/clear_collection?', {}, function(err) {if(err) console.error(err);});
 
 
-console.log(trainingdata.getTrainingData().length);//trainingdata.getTrainingData()
+//console.log(trainingdata.getTrainingData().length);//trainingdata.getTrainingData()
 // sendToIndico('/custom/add_data?',['d', 'a'] , function(err, a, status) {
 	// if(err) return console.error('Error training: ' + err);
 	//if(a) console.log(a);
@@ -49,7 +47,7 @@ console.log(trainingdata.getTrainingData().length);//trainingdata.getTrainingDat
 
 sendToIndico('/custom/predict?', "The hackathon is almost over", function(err, a, status) {
 	if(err) return console.error('Error predicting: ' + err);
-	if(a) console.log(a);
+	//if(a) console.log(a);
 	if(status) console.log(status);
 });
 
@@ -144,7 +142,7 @@ app.post('/photo', function(req, res) {
 
 
 app.post('/newMeme', function(req, res) {
-	console.log('recieved new meme');
+	//console.log('recieved new meme');
 	//console.log(req.body);
 	var memeString = req.body.memeString;
 	var topEmotion = req.body.topEmotion;
@@ -153,12 +151,31 @@ app.post('/newMeme', function(req, res) {
 
 });
 
-addMeme("I'm Happy!", "Happy");
-addMeme("The world is out to get me", "Sad");
-addMeme("I'm hangry!", "Angry");
-addMeme("I'm afeared!", "Fear");
-addMeme("wut?!", "Surprise");
-addMeme("I'm Boring!", "Neutral");
+app.post('/newText', function(req, res) {
+	sendToIndico('/custom/predict?', req.body, function(err, a, status) {
+	if(err) return console.error('Error predicting: ' + err);
+	if(status) {
+		 var results = JSON.parse(body).results;
+		var maxSentimentVal = 0.0;
+		var maxSentimentEmotion = "";
+		for(var key in results) {
+			if(results[key] > maxSentimentVal){
+				maxSentimentVal = results[key];
+				maxSentimentEmotion = key;
+				addMeme(req.body, maxSentimentEmotion);
+			}
+		}
+	}
+});
+
+});
+
+// addMeme("I'm Happy!", "Happy");
+// addMeme("The world is out to get me", "Sad");
+// addMeme("I'm hangry!", "Angry");
+// addMeme("I'm afeared!", "Fear");
+// addMeme("wut?!", "Surprise");
+// addMeme("I'm Boring!", "Neutral");
 //findRandStringMatch("Happy", );
 app.listen(3000,function(){
   console.log("server start");
