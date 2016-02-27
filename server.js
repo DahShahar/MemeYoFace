@@ -30,18 +30,16 @@ db.once('open', function() {
   var memeStringSchema = mongoose.Schema({
 		memeString: {type: String, required: true, unique: true},
 		topEmotion: {type: String, required: true},
-		secondEmotion: {type: String, required: true}
-
   });
-	addMeme = function(mStr, top, second) {
-		var meme = new MemeString({memeString: mStr, topEmotion: top, secondEmotion: second});
+	addMeme = function(mStr, top) {
+		var meme = new MemeString({memeString: mStr, topEmotion: top});
 		meme.save(function(err, meme) {
 			if(err) return console.error(err);
-			console.log('stored meme: ' + mStr + ' ' + top + ' ' + second);
+			console.log('stored meme: ' + mStr + ' ' + top);
 		});
 	}
   var MemeString = mongoose.model('MemeString', memeStringSchema);
-  var meme1 = new MemeString({memeString: 'I am happy', topEmotion: 'happy', secondEmotion: 'neutral'});
+  var meme1 = new MemeString({memeString: 'I am happy', topEmotion: 'happy'});
   // meme1.save(function(err, meme1) {
 	// if(err) return console.error(err);
 	// console.log('stored meme1: ' + meme1);
