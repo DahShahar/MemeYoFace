@@ -29,6 +29,11 @@ db.once('open', function() {
   
 });
 app.use(express.static("public"));
+
+app.post('/photo', function(req, res){
+  console.log(req);
+});
+
 app.listen(3000,function(){
   console.log("server start");
 });
