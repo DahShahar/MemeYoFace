@@ -48,11 +48,18 @@ button{
   margin-left: -3%;
 }
 
-h1, p{
+h1{
   /*margin-top: 0px;
   margin-bottom: 0px;
   padding-top: 0px;*/
   vertical-align: top;
-  /*color: #FFFFFF !important;*/
+  color: #8ffff5 !important;
+  font-size: 150px !important;
+  font-family: 'Erica One', cursive;
+}
+
+p {
+  color: #e83939 !important;
+  font-size: 35px !important;
   font-family: 'Erica One', cursive;
 }

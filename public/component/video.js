@@ -111,23 +111,42 @@
           'photo': data
         }
       }).then(function(o, b, a) {
-        console.log(b); //string
-        console.log(a); //actual object
-        console.log(o); //success
+        // console.log(b); //string
+        // console.log(a); //actual object
+        // console.log(o); //success
+
+        console.log(o);
+        var results = JSON.parse(o).results;
+        var maxSentimentVal = 0.0;
+        var maxSentimentEmotion = "";
+        for(var key in results) {
+          if(results[key] > maxSentimentVal){
+            maxSentimentVal = results[key];
+            maxSentimentEmotion = key;
+          }
+        }
+
+        //POST reqest to backend pass in maxSentimentEmotion
+
+        console.log(maxSentimentVal, maxSentimentEmotion)
+        // var max = '';
+        // for (var key in a.responseJSON) {
+        //   console.log(key);
+        // }
       });
     } else {
       clearphoto();
     }
-/*
+    /*
 
-    $.post(
-      'https://apiv2.indico.io/fer?key=af2ed1cbeec6eada266d61cfc4f4c029',
-      JSON.stringify({
-        'data': "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/0a4/3fb/3906951.jpg"
-      })
-    ).then(function(res) {
-      console.log(res);
-    });*/
+        $.post(
+          'https://apiv2.indico.io/fer?key=af2ed1cbeec6eada266d61cfc4f4c029',
+          JSON.stringify({
+            'data': "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/0a4/3fb/3906951.jpg"
+          })
+        ).then(function(res) {
+          console.log(res);
+        });*/
   }
 
 
