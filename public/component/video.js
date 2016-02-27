@@ -158,7 +158,22 @@
           console.log(res);
         });*/
   }
-
+// function sendMessage(){
+// $.post('localhost:3000/newText', $("#input").val).then(o);
+// }
+//   var meme = form.getContext('meme');
+//   $.ajax('/newText', {
+//     method: 'POST',
+//     data: {
+//       'photo': data
+//     }
+//   }).then(function(o, b, a) {
+//
+//   });
+//  else {
+//
+// }
+// }
 
   // Set up our event listener to run the startup process
   // once loading is complete.
