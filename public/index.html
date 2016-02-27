@@ -11,6 +11,7 @@
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/home.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Erica+One' rel='stylesheet' type='text/css'>
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,15 +22,40 @@
 </head>
 
 <body>
-  <div class="camera">
-    <video id="video">Video stream not available.</video>
-    <button id="startbutton">Take photo</button>
+  <div class="jumbotron fill">
+    <div class="container-fluid">
+      <h1>
+        Dank Memez Yo
+      </h1>
+    <div class="col-md-5 pull-left">
+      <div class="panel panel-default align pull-left">
+        <div class="panel-body vid-container">
+          <div class="camera">
+            <video id="video">Video stream not available.</video>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class = "col-md-2">
+      <button class="center" id="startbutton">
+        <span class="glyphicon glyphicon-camera"></span>
+      </button>
+    </div>
+    <div class="col-md-5">
+      <div class="panel panel-default align pull-right">
+        <div class="panel-body vid-container">
+          <canvas id="canvas" style="display:none;">
+          </canvas>
+          <div class="output">
+            <img id="photo" alt="The screen capture will appear in this box.">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <canvas id="canvas" style="display:none;">
-  </canvas>
-  <div class="output">
-    <img id="photo" alt="The screen capture will appear in this box.">
   </div>
+
   <!-- </div> -->
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
