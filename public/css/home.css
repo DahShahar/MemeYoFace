@@ -4,6 +4,12 @@
 
 .align{
   margin-top: 2vh;
+  width: 550px !important;
+  height: 410px !important;
+}
+
+.middle-align{
+  margin-top: 20vh;
 }
 
 .fill{

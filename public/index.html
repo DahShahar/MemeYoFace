@@ -21,15 +21,34 @@
 </head>
 
 <body>
-  <div class="camera">
-    <video id="video">Video stream not available.</video>
-    <button id="startbutton">Take photo</button>
+  <div class = "navbar">
   </div>
-  <canvas id="canvas" style="display:none;">
-  </canvas>
-  <div class="output">
-    <img id="photo" alt="The screen capture will appear in this box.">
+  <div class="col-md-5">
+    <div class="panel panel-default align">
+      <div class="panel-body">
+        <div class="camera">
+          <video id="video">Video stream not available.</video>
+        </div>
+      </div>
+    </div>
   </div>
+    <div class="col-md-2">
+      <button class = "middle-align" id="startbutton">
+        <span class="glyphicon glyphicon-camera"></span>
+      </button>
+
+    </div>
+    <div class="col-md-5 align">
+      <div class="panel panel-default fill">
+        <div class="panel-body">
+          <canvas id="canvas" style="display:none;">
+          </canvas>
+          <div class="output">
+            <img id="photo" alt="The screen capture will appear in this box.">
+          </div>
+        </div>
+      </div>
+    </div>
   <!-- </div> -->
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
