@@ -19,9 +19,11 @@
   "homepage": "https://github.com/akarle/MemeYoFace#readme",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "caption": "^0.1.1",
     "express": "^4.13.4",
     "indico.io": "^0.6.2",
     "mongoose": "^4.4.5",
-    "request": "^2.69.0"
+    "request": "^2.69.0",
+    "smartcrop": "0.0.1"
   }
 }

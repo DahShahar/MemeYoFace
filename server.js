@@ -1,9 +1,11 @@
 var fs = require('fs');
 var express = require("express");
 var bodyParser = require("body-parser");
+// var smartcrop = require("smartcrop")
 var request = require("request");
 var app = express();
 var trainingdata = require("./convertTrainingSet");
+var caption = require("caption");
 
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
@@ -104,27 +106,10 @@ app.post('/newMeme', function(req, res) {
 	console.log(req.body);
 	var memeString = req.body.memeString;
 	var topEmotion = req.body.topEmotion;
-	var secondEmotion = req.body.secondEmotion;
-	addMeme(memeString, topEmotion, secondEmotion);
-	res.send(memeString + ' ' + topEmotion + ' ' + secondEmotion);
+	addMeme(memeString, topEmotion);
+	res.send(memeString + ' ' + topEmotion);
 
 });
 app.listen(3000,function(){
   console.log("server start");
 });
-
-function addText(img, txt1, txt2){
-
-  var imageObj = new Image();
-
-  imageObj = function() {
-    context.drawImage(imageObj, 69, 50);
-    context.font = "40px Arial";
-    context.fillStyle = "white";
-    context.textAlign = "center";
-    context.fillText(txt1,canvas.width/2,100);
-    context.fillText(txt2,canvas.width/2,canvas.height-100);
-  };
-  imageObj.src = img;
-
-}

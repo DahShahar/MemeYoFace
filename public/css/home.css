@@ -2,10 +2,22 @@
   text-align: center;
 }
 
+body{
+  background-image: url("../giphy.gif");
+  overflow: hidden;
+}
+
+.clear{
+  background: none;
+}
 .align{
   margin-top: 2vh;
   width: 550px !important;
   height: 410px !important;
+}
+
+.tight{
+  padding-top: 0px;
 }
 
 /*.middle-align{
@@ -24,14 +36,17 @@
 }
 
 button{
-  margin-top: 22vh;
   width: 100%;
   border-radius: 3px;
   border: solid 1px black;
   background: none;
+  margin-left: -3%;
 }
 
 h1{
-  margin-left: 15px;
+  /*margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;*/
+  vertical-align: top;
   font-family: 'Erica One', cursive;
 }
