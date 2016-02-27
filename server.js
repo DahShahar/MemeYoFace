@@ -104,7 +104,23 @@ app.post('/photo', function(req, res) {
 		err.log(err);
 	}
 	console.log(body);
+
+  var results = JSON.parse(body).results;
+  var maxSentimentVal = 0.0;
+  var maxSentimentEmotion = "";
+  for(var key in results) {
+    if(results[key] > maxSentimentVal){
+      maxSentimentVal = results[key];
+      maxSentimentEmotion = key;
+    }
+  }
+
+  console.log(maxSentimentVal, maxSentimentEmotion)
+
+
+  res.json(maxSentimentEmotion);//change to text to send back
   });
+
   
 	var query = MemeString.find({'topEmotion': emot});
 	query.select('memeString');
@@ -112,6 +128,8 @@ app.post('/photo', function(req, res) {
 	if(err) return console.error(err);
 	console.log(meme[getRandomInt(0, meme.length)].memeString);
 	});
+
+
 
 });
 
