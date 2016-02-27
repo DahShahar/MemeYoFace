@@ -50,7 +50,7 @@ db.once('open', function() {
 
 
 var key = JSON.parse(fs.readFileSync('indico/key.json', 'utf8'))[0];
-indico.apiKey = key.key;
+indico.apiKey = key;
 
 var response = function(res) { console.log(res); }
 var logError = function(err) { console.log(err); }
