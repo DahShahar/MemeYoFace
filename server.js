@@ -1,7 +1,7 @@
 var fs = require('fs');
 var express = require("express");
 var bodyParser = require("body-parser");
-var smartcrop = require("smartcrop")
+// var smartcrop = require("smartcrop")
 var request = require("request");
 var app = express();
 var trainingdata = require("./convertTrainingSet");
@@ -84,7 +84,7 @@ var logError = function(err) { console.log(err); }
 
 app.post('/photo', function(req, res) {
 	var pic = req.body.photo;
-  //smartcrop.crop(pic, {width: 300, height: 300}, function(result){console.log(result);});
+  // smartcrop.crop(pic, {width: 100, height: 100}, function(result){console.log(result);});
 	var pic64 = pic.split(',')[1] //strip off data:image/png;base64
     indico.fer(pic64, function(err, response, body) {
 	if(err){
