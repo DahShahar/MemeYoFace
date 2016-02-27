@@ -3,6 +3,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var request = require("request");
 var app = express();
+var trainingdata = require("./convertTrainingSet");
 
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
@@ -18,6 +19,26 @@ indico.fer = function(photo, callback) {
 	//console.log('https://apiv2.indico.io/fer?key=' + this.apiKey);
 	request.post({url: 'https://apiv2.indico.io/fer?key=' + this.apiKey, form: {'data': photo}}, callback)
 };
+
+function sendToIndico(endpoint, data, callback) {
+  var key = this.apiKey;
+    collectionName = 'my_collection',
+    url = 'https://apiv2.indico.io'+ endpoint +'?key='+ key,
+    log = function(res) { console.log(res) };
+  
+  var callback = callback || log;
+  
+  // Using jQuery ($) to make requests
+  $.post(url, JSON.stringify({
+    data: data,
+    collection: collectionName
+  }), callback);
+}
+
+
+
+
+
 
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
