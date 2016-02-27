@@ -110,8 +110,10 @@
         data: {
           'photo': data
         }
-      }).done(function(o) {
-        console.log(o);
+      }).then(function(o, b, a) {
+        console.log(b); //string
+        console.log(a); //actual object
+        console.log(o); //success
       });
     } else {
       clearphoto();

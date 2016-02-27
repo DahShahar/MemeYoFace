@@ -91,7 +91,9 @@ app.post('/photo', function(req, res) {
 		err.log(err);
 	}
 	console.log(body);
+  res.json(body);
   });
+
 });
 
 
