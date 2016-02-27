@@ -1,4 +1,3 @@
-var indico = require('indico.io');
 var fs = require('fs');
 var express = require("express");
 var bodyParser = require("body-parser");
@@ -8,6 +7,11 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static("public"));
 
+var indico = new Object();
+indico.apiKey = '';
+indico.fer = function(photo) {
+	return $.post('https://apiv2.indico.io/fer?key=' + apiKey, JSON.stringify({'data': photo}))
+};
 
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
@@ -44,9 +48,9 @@ db.once('open', function() {
 
   });
 
-
-var key = JSON.parse(fs.readFileSync('indico/key.json', 'utf8'))[0];
-indico.apiKey = key;
+console.log(fs.readFileSync('indico/key.json', 'utf8'));
+var key = JSON.parse(fs.readFileSync('indico/key.json', 'utf8'));
+indico.apiKey = key.key;
 
 var response = function(res) { console.log(res); }
 var logError = function(err) { console.log(err); }
