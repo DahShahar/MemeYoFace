@@ -108,7 +108,7 @@
       $.ajax('/photo', {
         method: 'POST',
         data: {
-          photo: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/0a4/3fb/3906951.jpg" //data
+          'photo': data
         }
       }).done(function(o) {
         console.log(o);

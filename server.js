@@ -1,18 +1,22 @@
 var fs = require('fs');
-var $ = require('jquery');
 var express = require("express");
 var bodyParser = require("body-parser");
+var request = require("request");
 var app = express();
 
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static("public"));
 
+
 var indico = new Object();
 var key = JSON.parse(fs.readFileSync('indico/key.json', 'utf8'))[0];
 indico.apiKey = key;
-indico.fer = function(photo) {
-	return $.post('https://apiv2.indico.io/fer?key=' + this.apiKey, JSON.stringify({'data': photo}))
+indico.fer = function(photo, callback) {
+	//console.log(photo);
+	//onsole.log(JSON.stringify({'data': photo.substr(0, 100)}));
+	//console.log('https://apiv2.indico.io/fer?key=' + this.apiKey);
+	request.post({url: 'https://apiv2.indico.io/fer?key=' + this.apiKey, form: {'data': photo}}, callback)
 };
 
 var bodyParser = require('body-parser');
@@ -58,13 +62,14 @@ var logError = function(err) { console.log(err); }
 
 
 app.post('/photo', function(req, res) {
-
-  indico.fer(req.body.photo)
-    .then(function(data) {
-      res.json(data);
-    }).catch(function(err) {
-      console.warn(err);
-    });
+	var pic = req.body.photo;
+	var pic64 = pic.split(',')[1] //strip off data:image/png;base64
+    indico.fer(pic64, function(err, response, body) {
+	if(err){
+		err.log(err);
+	}
+	console.log(body);
+  });
 });
 
 
