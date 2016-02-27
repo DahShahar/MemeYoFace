@@ -3,7 +3,7 @@
 }
 
   body {
-    background: url('../Dank Meme collage copy.jpg') no-repeat center center fixed;
+    background: url('../meme-collage.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -43,14 +43,16 @@ button{
   width: 100%;
   border-radius: 3px;
   border: solid 1px black;
-  background: none;
+  /*background: none;*/
+  background-color: #FFFFFF;
   margin-left: -3%;
 }
 
-h1{
+h1, p{
   /*margin-top: 0px;
   margin-bottom: 0px;
   padding-top: 0px;*/
   vertical-align: top;
+  /*color: #FFFFFF !important;*/
   font-family: 'Erica One', cursive;
 }
