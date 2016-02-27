@@ -123,7 +123,7 @@
         img.src = data;
         canvas.width = width;
         canvas.height = height;
-        Meme(img, 'canvas', o, 'k');
+        Meme(img, 'canvas', o, '');
         // context.drawImage(data, 0, 0, width, height);
         // photo.setAttribute('src', data);
         // var results = JSON.parse(o).results;

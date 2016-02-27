@@ -122,7 +122,7 @@ app.post('/photo', function(req, res) {
   console.log(maxSentimentVal, maxSentimentEmotion)
 
 
-  res.json(mStr);//change to text to send back
+  res.json(mStr);//send back meme string
   });
 
 
