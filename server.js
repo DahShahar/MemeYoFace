@@ -62,9 +62,6 @@ app.post('/photo', function(req, res) {
     });
 });
 
-app.listen(3000, function() {
-  console.log("server start");
-});
 
 app.post('/newMeme', function(req, res) {
 	console.log('recieved new meme');
@@ -74,7 +71,7 @@ app.post('/newMeme', function(req, res) {
 	var secondEmotion = req.body.secondEmotion;
 	addMeme(memeString, topEmotion, secondEmotion);
 	res.send(memeString + ' ' + topEmotion + ' ' + secondEmotion);
-	
+
 });
 app.listen(3000,function(){
   console.log("server start");
