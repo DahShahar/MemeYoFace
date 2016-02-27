@@ -170,7 +170,7 @@ app.post('/newText', function(req, res) {
 			}
 			res.send(mt);
 		}
-		
+
 });
 
 }});
@@ -181,6 +181,15 @@ app.post('/newText', function(req, res) {
 // addMeme("I'm afeared!", "Fear");
 // addMeme("wut?!", "Surprise");
 // addMeme("I'm Boring!", "Neutral");
+addMeme("I'm crying with my eyes.", "Sad");
+addMeme("I'm lonely.", "Sad");
+addMeme("I love caffeine!", "Happy");
+addMeme("I love dank memes!", "Happy");
+addMeme("I worry. A lot.", "Nervous");
+addMeme("I wish I was somewhere else.", "Nervous");
+addMeme("These creators are so smart!", "Happy");
+addMeme("Country music makes me mad.", "Angry");
+
 //findRandStringMatch("Happy", );
 app.listen(3000,function(){
   console.log("server start");
