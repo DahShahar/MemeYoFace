@@ -25,6 +25,5 @@
  JSON.stringify({
    'data': "http://s.huffpost.com/contributors/lauren-galley/headshot.jpg"
  })
- 
 
 ).then(function(res) { console.log(res) });

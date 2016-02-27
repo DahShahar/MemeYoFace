@@ -3,8 +3,8 @@
   // width to the value defined here, but the height will be
   // calculated based on the aspect ratio of the input stream.
 
-  var width = 500;    // We will scale the photo width to this
-  var height = 0;     // This will be computed based on the input stream
+  var width = 500; // We will scale the photo width to this
+  var height = 0; // This will be computed based on the input stream
 
   // |streaming| indicates whether or not we're currently streaming
   // video from the camera. Obviously, we start at false.
@@ -25,13 +25,12 @@
     photo = document.getElementById('photo');
     startbutton = document.getElementById('startbutton');
 
-    navigator.getMedia = ( navigator.getUserMedia ||
-                           navigator.webkitGetUserMedia ||
-                           navigator.mozGetUserMedia ||
-                           navigator.msGetUserMedia);
+    navigator.getMedia = (navigator.getUserMedia ||
+      navigator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia ||
+      navigator.msGetUserMedia);
 
-    navigator.getMedia(
-      {
+    navigator.getMedia({
         video: true,
         audio: false
       },
@@ -50,15 +49,15 @@
       }
     );
 
-    video.addEventListener('canplay', function(ev){
+    video.addEventListener('canplay', function(ev) {
       if (!streaming) {
-        height = video.videoHeight / (video.videoWidth/width);
+        height = video.videoHeight / (video.videoWidth / width);
 
         // Firefox currently has a bug where the height can't be read from
         // the video, so we will make assumptions if this happens.
 
         if (isNaN(height)) {
-          height = width / (4/3);
+          height = width / (4 / 3);
         }
 
         video.setAttribute('width', width);
@@ -69,7 +68,7 @@
       }
     }, false);
 
-    startbutton.addEventListener('click', function(ev){
+    startbutton.addEventListener('click', function(ev) {
       takepicture();
       ev.preventDefault();
     }, false);
@@ -101,23 +100,33 @@
       canvas.width = width;
       canvas.height = height;
       context.drawImage(video, 0, 0, width, height);
+      // var data = canvas.toDataURL('image/png'); //image/png is the type param
+      // var data64 = window.btoa(data);
+      var data = ReImg.fromCanvas(document.getElementById('canvas')).toBase64();
 
-      var data = canvas.toDataURL('image/png');
       photo.setAttribute('src', data);
-      $.ajax({
+      $.ajax('/photo', {
         method: 'POST',
-        url: 'http://localhost:3000/photo',
         data: {
-          photo: data
+          photo: "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/0a4/3fb/3906951.jpg" //data
         }
       }).done(function(o) {
-        consolde.log('saved');
+        console.log(o);
       });
     } else {
       clearphoto();
     }
-  }
+/*
 
+    $.post(
+      'https://apiv2.indico.io/fer?key=af2ed1cbeec6eada266d61cfc4f4c029',
+      JSON.stringify({
+        'data': "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/0a4/3fb/3906951.jpg"
+      })
+    ).then(function(res) {
+      console.log(res);
+    });*/
+  }
 
 
   // Set up our event listener to run the startup process
