@@ -106,15 +106,19 @@
       photo.setAttribute('src', data);
       $.ajax({
         method: 'POST',
-        url: 'photo_upload.php',
+        url: 'http://localhost:3000/photo',
         data: {
-          photo: photo
+          photo: data
         }
+      }).done(function(o) {
+        consolde.log('saved');
       });
     } else {
       clearphoto();
     }
   }
+
+
 
   // Set up our event listener to run the startup process
   // once loading is complete.
