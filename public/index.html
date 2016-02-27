@@ -10,6 +10,7 @@
 
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/home.css" rel="stylesheet">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -22,12 +23,14 @@
 <body>
   <div class = "container-fluid">
     <div class="col-md-8 col-md-offset-2">
-      <div class="panel panel-default">
+      <div class="panel panel-default align">
         <div class="panel-heading">
-          <h3 class="panel-title">Take an Image</h3>
+          <h3 class="panel-title center">Take an Image</h3>
         </div>
         <div class="panel-body">
-          <input type="file" accept="image/*;capture=camera">
+          <canvas class = "fill"></canvas>
+          <input type="file" accept="image/*" capture>
+          <input type="submit" value="Upload">
         </div>
       </div>
 
