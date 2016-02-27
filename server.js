@@ -1,4 +1,5 @@
 var fs = require('fs');
+var $ = require('jQuery');
 var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
