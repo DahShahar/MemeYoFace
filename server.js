@@ -89,7 +89,7 @@ db.once('open', function() {
 	// if(err) return console.error(err);
 	//console.log(memes);
   // });
-  
+
 
 
 
@@ -131,10 +131,10 @@ app.post('/photo', function(req, res) {
   console.log(maxSentimentVal, maxSentimentEmotion)
 
 
-  res.json(mStr);//change to text to send back
+  res.json(mStr);//send back meme string
   });
 
-  
+
 
 	});
 
@@ -153,7 +153,12 @@ app.post('/newMeme', function(req, res) {
 
 });
 
-addMeme("Sw", "Happy");
+addMeme("I'm Happy!", "Happy");
+addMeme("The world is out to get me", "Sad");
+addMeme("I'm hangry!", "Angry");
+addMeme("I'm afeared!", "Fear");
+addMeme("wut?!", "Surprise");
+addMeme("I'm Boring!", "Neutral");
 //findRandStringMatch("Happy", );
 app.listen(3000,function(){
   console.log("server start");
