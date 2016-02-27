@@ -5,7 +5,7 @@ var bodyParser = require("body-parser");
 var request = require("request");
 var app = express();
 var trainingdata = require("./convertTrainingSet");
-var caption = require('caption')
+var caption = require("caption");
 
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
@@ -84,7 +84,6 @@ var logError = function(err) { console.log(err); }
 
 app.post('/photo', function(req, res) {
 	var pic = req.body.photo;
-  // smartcrop.crop(pic, {width: 100, height: 100}, function(result){console.log(result);});
 	var pic64 = pic.split(',')[1] //strip off data:image/png;base64
     indico.fer(pic64, function(err, response, body) {
 	if(err){
@@ -102,14 +101,7 @@ app.post('/newMeme', function(req, res) {
 	console.log(req.body);
 	var memeString = req.body.memeString;
 	var topEmotion = req.body.topEmotion;
-	caption.url("http://i.imgur.com/AtLeN.png",{
-	  caption : "You are mistaken.",
-	  bottomCaption : "This is my bowl.",
-	  outputFile : "cat.jpg"
-	},function(err,filename){
-	  // do stuff
-	});
-		addMeme(memeString, topEmotion);
+	addMeme(memeString, topEmotion);
 	res.send(memeString + ' ' + topEmotion);
 
 });

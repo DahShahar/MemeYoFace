@@ -3,8 +3,12 @@
 }
 
 body{
-  background-color: rgb(238,238,238);
+  background-image: url("../giphy.gif");
   overflow: hidden;
+}
+
+.clear{
+  background: none;
 }
 .align{
   margin-top: 2vh;
