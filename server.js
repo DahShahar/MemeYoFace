@@ -14,6 +14,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/memeyoface');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
+var addMeme;
 db.once('open', function() {
   // we're connected!
   var memeStringSchema = mongoose.Schema({
@@ -22,7 +23,13 @@ db.once('open', function() {
 		secondEmotion: {type: String, required: true}
 
   });
-
+	addMeme = function(mStr, top, second) {
+		var meme = new MemeString({memeString: mStr, topEmotion: top, secondEmotion: second});
+		meme.save(function(err, meme) {
+			if(err) return console.error(err);
+			console.log('stored meme: ' + mStr + ' ' + top + ' ' + second);
+		});
+	}
   var MemeString = mongoose.model('MemeString', memeStringSchema);
   var meme1 = new MemeString({memeString: 'I am happy', topEmotion: 'happy', secondEmotion: 'neutral'});
   // meme1.save(function(err, meme1) {
@@ -65,7 +72,9 @@ app.post('/newMeme', function(req, res) {
 	var memeString = req.body.memeString;
 	var topEmotion = req.body.topEmotion;
 	var secondEmotion = req.body.secondEmotion;
+	addMeme(memeString, topEmotion, secondEmotion);
 	res.send(memeString + ' ' + topEmotion + ' ' + secondEmotion);
+	
 });
 app.listen(3000,function(){
   console.log("server start");
