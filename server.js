@@ -48,8 +48,8 @@ db.once('open', function() {
 
   });
 
-console.log(fs.readFileSync('indico/key.json', 'utf8'));
-var key = JSON.parse(fs.readFileSync('indico/key.json', 'utf8'));
+
+var key = JSON.parse(fs.readFileSync('indico/key.json', 'utf8'))[0];
 indico.apiKey = key.key;
 
 var response = function(res) { console.log(res); }
