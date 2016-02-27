@@ -45,11 +45,11 @@ function sendToIndico(endpoint, data, callback) {
 	// if(status) console.log(status);
 // });
 
-sendToIndico('/custom/predict?', "The hackathon is almost over", function(err, a, status) {
+/* sendToIndico('/custom/predict?', "The hackathon is almost over", function(err, a, status) {
 	if(err) return console.error('Error predicting: ' + err);
 	//if(a) console.log(a);
 	if(status) console.log(status);
-});
+}); */
 
 
 
@@ -152,23 +152,28 @@ app.post('/newMeme', function(req, res) {
 });
 
 app.post('/newText', function(req, res) {
-	sendToIndico('/custom/predict?', req.body, function(err, a, status) {
-	if(err) return console.error('Error predicting: ' + err);
-	if(status) {
-		 var results = JSON.parse(body).results;
-		var maxSentimentVal = 0.0;
-		var maxSentimentEmotion = "";
-		for(var key in results) {
-			if(results[key] > maxSentimentVal){
-				maxSentimentVal = results[key];
-				maxSentimentEmotion = key;
-				addMeme(req.body, maxSentimentEmotion);
+	console.log(req.body);
+	var mt = req.body.memeText;
+	if(mt) {
+		sendToIndico('/custom/predict?', mt, function(err, a, status) {
+		if(err) return console.error('Error predicting: ' + err);
+		if(status) {
+			 var results = JSON.parse(status).results;
+			var maxSentimentVal = 0.0;
+			var maxSentimentEmotion = "";
+			for(var key in results) {
+				if(results[key] > maxSentimentVal){
+					maxSentimentVal = results[key];
+					maxSentimentEmotion = key;
+					addMeme(mt, maxSentimentEmotion);
+				}
 			}
+			res.send(mt);
 		}
-	}
+		
 });
 
-});
+}});
 
 // addMeme("I'm Happy!", "Happy");
 // addMeme("The world is out to get me", "Sad");
