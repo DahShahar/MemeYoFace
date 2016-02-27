@@ -24,20 +24,20 @@ indico.fer = function(photo, callback) {
 
 function sendToIndico(endpoint, data, callback) {
   var key =  indico.apiKey;
-  console.log(key);
-    collectionName = 'memeText';
-    url = 'https://apiv2.indico.io'+ endpoint +'?key='+ key;
+  console.log(data, typeof data);
+    collectionName = 'memep';
+    url = 'https://apiv2.indico.io'+ endpoint +'key='+ key;
 	console.log(url);
   request.post({url: url, form: {'data': data, 'collection': collectionName}}, callback);
 }
-
-sendToIndico('/custom/batch/add_data?domain=sentiment', trainingdata.getTrainingData(), function(err, a, status) {
+console.log(trainingdata.getTrainingData());//trainingdata.getTrainingData()
+sendToIndico('/custom/add_data?',['d', 'a'] , function(err, a, status) {
 	if(err) return console.error('Error training: ' + err);
 	//if(a) console.log(a);
 	if(status) console.log(status);
 });
 
-sendToIndico('/custom/train', {}, function(err, a, status) {
+sendToIndico('/custom/train?', {}, function(err, a, status) {
 	if(err) return console.error('Error training: ' + err);
 	//if(a) console.log(a);
 	if(status) console.log(status);
@@ -55,6 +55,7 @@ mongoose.connect('mongodb://localhost/memeyoface');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 var addMeme;
+var findRandStringMatch;
 db.once('open', function() {
   // we're connected!
   var memeStringSchema = mongoose.Schema({
@@ -69,18 +70,19 @@ db.once('open', function() {
 		});
 	}
   var MemeString = mongoose.model('MemeString', memeStringSchema);
-  var meme1 = new MemeString({memeString: 'I am happy', topEmotion: 'happy'});
+  //var meme1 = new MemeString({memeString: 'I am happy', topEmotion: 'happy'});
   // meme1.save(function(err, meme1) {
 	// if(err) return console.error(err);
 	// console.log('stored meme1: ' + meme1);
   // });
 
-  MemeString.find(function(err, memes) {
-	if(err) return console.error(err);
+  // MemeString.find(function(err, memes) {
+	// if(err) return console.error(err);
 	//console.log(memes);
-  });
+  // });
+  
 
-  });
+
 
 
 
@@ -89,8 +91,13 @@ var response = function(res) { console.log(res); }
 var logError = function(err) { console.log(err); }
 
 
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 app.post('/photo', function(req, res) {
 	var pic = req.body.photo;
+	var emot = 'Happy';
 	var pic64 = pic.split(',')[1] //strip off data:image/png;base64
     indico.fer(pic64, function(err, response, body) {
 	if(err){
@@ -98,18 +105,30 @@ app.post('/photo', function(req, res) {
 	}
 	console.log(body);
   });
+  
+	var query = MemeString.find({'topEmotion': emot});
+	query.select('memeString');
+	query.exec(function(err, meme) {
+	if(err) return console.error(err);
+	console.log(meme[getRandomInt(0, meme.length)].memeString);
+	});
+
 });
 
 
 app.post('/newMeme', function(req, res) {
 	console.log('recieved new meme');
-	console.log(req.body);
+	//console.log(req.body);
 	var memeString = req.body.memeString;
 	var topEmotion = req.body.topEmotion;
 	addMeme(memeString, topEmotion);
 	res.send(memeString + ' ' + topEmotion);
 
 });
+
+addMeme("Sw", "Happy");
+//findRandStringMatch("Happy", );
 app.listen(3000,function(){
   console.log("server start");
+});
 });
