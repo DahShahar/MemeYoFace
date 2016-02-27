@@ -103,19 +103,29 @@
       // var data = canvas.toDataURL('image/png'); //image/png is the type param
       // var data64 = window.btoa(data);
       var data = ReImg.fromCanvas(document.getElementById('canvas')).toBase64();
-      
+
       photo.setAttribute('src', data);
+
       $.ajax('/photo', {
         method: 'POST',
         data: {
           'photo': data
         }
       }).then(function(o, b, a) {
+        // Meme(data, canvas, 'What?', 'No');
+
         // console.log(b); //string
         // console.log(a); //actual object
         // console.log(o); //success
 
         console.log(o);
+        var img = new Image();
+        img.src = data;
+        canvas.width = width;
+        canvas.height = height;
+        Meme(img, 'canvas', o, 'k');
+        // context.drawImage(data, 0, 0, width, height);
+        // photo.setAttribute('src', data);
         // var results = JSON.parse(o).results;
         // var maxSentimentVal = 0.0;
         // var maxSentimentEmotion = "";
