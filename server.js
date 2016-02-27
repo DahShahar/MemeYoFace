@@ -1,6 +1,7 @@
 var fs = require('fs');
 var express = require("express");
 var bodyParser = require("body-parser");
+var smartcrop = require("smartcrop")
 var request = require("request");
 var app = express();
 var trainingdata = require("./convertTrainingSet");
@@ -25,9 +26,9 @@ function sendToIndico(endpoint, data, callback) {
     collectionName = 'my_collection',
     url = 'https://apiv2.indico.io'+ endpoint +'?key='+ key,
     log = function(res) { console.log(res) };
-  
+
   var callback = callback || log;
-  
+
   // Using jQuery ($) to make requests
   $.post(url, JSON.stringify({
     data: data,
@@ -82,6 +83,7 @@ var logError = function(err) { console.log(err); }
 
 app.post('/photo', function(req, res) {
 	var pic = req.body.photo;
+  //smartcrop.crop(pic, {width: 300, height: 300}, function(result){console.log(result);});
 	var pic64 = pic.split(',')[1] //strip off data:image/png;base64
     indico.fer(pic64, function(err, response, body) {
 	if(err){
