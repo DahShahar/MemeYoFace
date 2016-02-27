@@ -18,24 +18,31 @@ indico.apiKey = key;
 indico.fer = function(photo, callback) {
 	//console.log(photo);
 	//onsole.log(JSON.stringify({'data': photo.substr(0, 100)}));
-	//console.log('https://apiv2.indico.io/fer?key=' + this.apiKey);
+	console.log('https://apiv2.indico.io/fer?key=' + this.apiKey);
 	request.post({url: 'https://apiv2.indico.io/fer?key=' + this.apiKey, form: {'data': photo}}, callback)
 };
 
 function sendToIndico(endpoint, data, callback) {
-  var key = this.apiKey;
-    collectionName = 'my_collection',
-    url = 'https://apiv2.indico.io'+ endpoint +'?key='+ key,
-    log = function(res) { console.log(res) };
-
-  var callback = callback || log;
-
-  // Using jQuery ($) to make requests
-  $.post(url, JSON.stringify({
-    data: data,
-    collection: collectionName
-  }), callback);
+  var key =  indico.apiKey;
+  console.log(key);
+    collectionName = 'memeText';
+    url = 'https://apiv2.indico.io'+ endpoint +'?key='+ key;
+	console.log(url);
+  request.post({url: url, form: {'data': data, 'collection': collectionName}}, callback);
 }
+
+sendToIndico('/custom/batch/add_data?domain=sentiment', trainingdata.getTrainingData(), function(err, a, status) {
+	if(err) return console.error('Error training: ' + err);
+	//if(a) console.log(a);
+	if(status) console.log(status);
+});
+
+sendToIndico('/custom/train', {}, function(err, a, status) {
+	if(err) return console.error('Error training: ' + err);
+	//if(a) console.log(a);
+	if(status) console.log(status);
+});
+
 
 
 
@@ -70,7 +77,7 @@ db.once('open', function() {
 
   MemeString.find(function(err, memes) {
 	if(err) return console.error(err);
-	console.log(memes);
+	//console.log(memes);
   });
 
   });
