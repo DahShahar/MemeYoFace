@@ -97,7 +97,6 @@ function getRandomInt(min, max) {
 
 app.post('/photo', function(req, res) {
 	var pic = req.body.photo;
-	var emot = 'Happy';
 	var pic64 = pic.split(',')[1] //strip off data:image/png;base64
     indico.fer(pic64, function(err, response, body) {
 	if(err){
@@ -114,19 +113,20 @@ app.post('/photo', function(req, res) {
       maxSentimentEmotion = key;
     }
   }
-
-  console.log(maxSentimentVal, maxSentimentEmotion)
-
-
-  res.json(maxSentimentEmotion);//change to text to send back
-  });
-
-  
-	var query = MemeString.find({'topEmotion': emot});
+	var query = MemeString.find({'topEmotion': maxSentimentEmotion});
 	query.select('memeString');
 	query.exec(function(err, meme) {
 	if(err) return console.error(err);
-	console.log(meme[getRandomInt(0, meme.length)].memeString);
+	mStr = meme[getRandomInt(0, meme.length)].memeString;
+	console.log(mStr);
+  console.log(maxSentimentVal, maxSentimentEmotion)
+
+
+  res.json(mStr);//change to text to send back
+  });
+
+  
+
 	});
 
 
