@@ -97,7 +97,21 @@ app.post('/photo', function(req, res) {
 		err.log(err);
 	}
 	console.log(body);
-  res.json(body);
+
+  var results = JSON.parse(body).results;
+  var maxSentimentVal = 0.0;
+  var maxSentimentEmotion = "";
+  for(var key in results) {
+    if(results[key] > maxSentimentVal){
+      maxSentimentVal = results[key];
+      maxSentimentEmotion = key;
+    }
+  }
+
+  console.log(maxSentimentVal, maxSentimentEmotion)
+
+
+  res.json(maxSentimentEmotion);//change to text to send back
   });
 
 });
