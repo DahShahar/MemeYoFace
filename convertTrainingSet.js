@@ -21914,7 +21914,7 @@ var d = 	{
 	};
 	var a = d.DATA;
 	var arr = [];
-	a.forEach(function(e) {arr.push([e.Sentence,e.Emotion])});
+	a.forEach(function(e) {arr.push([e.Sentence,e.Emotion]);});
 	return arr;
 }
 

@@ -25,24 +25,33 @@ indico.fer = function(photo, callback) {
 function sendToIndico(endpoint, data, callback) {
   var key =  indico.apiKey;
   console.log(data, typeof data);
-    collectionName = 'memep';
+    collectionName = 'wuttt';
     url = 'https://apiv2.indico.io'+ endpoint +'key='+ key;
 	console.log(url);
   request.post({url: url, form: {'data': data, 'collection': collectionName}}, callback);
 }
-console.log(trainingdata.getTrainingData());//trainingdata.getTrainingData()
-sendToIndico('/custom/add_data?',['d', 'a'] , function(err, a, status) {
-	if(err) return console.error('Error training: ' + err);
+
+//sendToIndico('/custom/clear_collection?', {}, function(err) {if(err) console.error(err);});
+
+
+console.log(trainingdata.getTrainingData().length);//trainingdata.getTrainingData()
+// sendToIndico('/custom/add_data?',['d', 'a'] , function(err, a, status) {
+	// if(err) return console.error('Error training: ' + err);
 	//if(a) console.log(a);
+	// if(status) console.log(status);
+// });
+
+// sendToIndico('/custom/train?', {}, function(err, a, status) {
+	// if(err) return console.error('Error training: ' + err);
+	//if(a) console.log(a);
+	// if(status) console.log(status);
+// });
+
+sendToIndico('/custom/predict?', "The hackathon is almost over", function(err, a, status) {
+	if(err) return console.error('Error predicting: ' + err);
+	if(a) console.log(a);
 	if(status) console.log(status);
 });
-
-sendToIndico('/custom/train?', {}, function(err, a, status) {
-	if(err) return console.error('Error training: ' + err);
-	//if(a) console.log(a);
-	if(status) console.log(status);
-});
-
 
 
 
