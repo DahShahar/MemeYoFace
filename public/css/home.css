@@ -14,6 +14,7 @@
 .clear{
   background: none;
 }
+
 .align{
   margin-top: 2vh;
   width: 550px !important;
@@ -22,6 +23,14 @@
 
 .tight{
   padding-top: 0px;
+}
+
+.opaque{
+  opacity: .4;
+}
+
+.not-opaque{
+  opacity: 1 !important;
 }
 
 /*.middle-align{
@@ -63,4 +72,8 @@ p {
   font-size: 35px !important;
   font-family: 'Erica One', cursive;
   margin-left: 20px;
+}
+
+.margin-top{
+  margin-top: 10px;
 }
